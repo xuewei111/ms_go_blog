@@ -92,6 +92,7 @@ func main() {
 	}
 
 	http.HandleFunc("/", index)
+	http.Handle("/resource/", http.StripPrefix("/resource/", http.FileServer(http.Dir("public/resource/"))))
 
 	if err := server.ListenAndServe(); err != nil {
 		log.Print(err)
