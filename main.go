@@ -2,9 +2,15 @@ package main
 
 import (
 	"log"
+	"ms-go-blog/common"
 	"ms-go-blog/router"
 	"net/http"
 )
+
+func init() {
+	// 模板加载
+	common.LoadTemplate()
+}
 
 func main() {
 	// 程序入口, 一个项目只能有一个入口
