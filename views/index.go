@@ -21,7 +21,7 @@ func (*HTMLApi) Index(w http.ResponseWriter, r *http.Request) {
 
 	if err := r.ParseForm(); err != nil {
 		log.Println("表单获取失败:", err)
-		index.WirteError(w, errors.New("系统错误,请联系管理员"))
+		index.WriteError(w, errors.New("系统错误,请联系管理员"))
 		return
 	}
 	pageStr := r.Form.Get("page")
@@ -34,7 +34,7 @@ func (*HTMLApi) Index(w http.ResponseWriter, r *http.Request) {
 	hr, err := service.GetAllIndexInfo(page, pageSize)
 	if err != nil {
 		log.Println("Index 获取数据出错:", err)
-		index.WirteError(w, errors.New("系统错误,请联系管理员"))
+		index.WriteError(w, errors.New("系统错误,请联系管理员"))
 	}
 
 	// 页面上涉及到的所有的数据,必须有定义

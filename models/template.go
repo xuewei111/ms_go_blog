@@ -28,7 +28,7 @@ func (t *TemplateBlog) WriteData(w io.Writer, data interface{}) {
 	}
 }
 
-func (t *TemplateBlog) WirteError(w io.Writer, err error) {
+func (t *TemplateBlog) WriteError(w io.Writer, err error) {
 	if err != nil {
 		_, err := w.Write([]byte(err.Error()))
 		if err != nil {
@@ -83,11 +83,11 @@ func readTemplate(templates []string, templateDir string) ([]TemplateBlog, error
 		t := template.New(viewName)
 		// 访问博客首页模板的时候,因为有多个模板的嵌套,解析文件的时候,需要将其涉及到的所有模板进行解析
 		home := templateDir + "home.html"
-		header := templateDir + "layout\\header.html"
-		footer := templateDir + "layout\\footer.html"
-		personal := templateDir + "layout\\personal.html"
-		post := templateDir + "layout\\post-list.html"
-		pagination := templateDir + "layout\\pagination.html"
+		header := templateDir + "layout/header.html"
+		footer := templateDir + "layout/footer.html"
+		personal := templateDir + "layout/personal.html"
+		post := templateDir + "layout/post-list.html"
+		pagination := templateDir + "layout/pagination.html"
 
 		t.Funcs(template.FuncMap{"isODD": IsODD, "getNextName": GetNextName, "date": Date, "dateDay": DateDay})
 		t, err := t.ParseFiles(templateDir+viewName, home, header, footer, personal, post, pagination)
