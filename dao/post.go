@@ -76,3 +76,30 @@ func GetPostPageByCategoryId(cId, page, pageSize int) ([]models.Post, error) {
 	}
 	return posts, nil
 }
+
+func GetPostById(pid int) (models.Post, error) {
+	row := DB.QueryRow("select * from blog_post where pid=?", pid)
+	var post models.Post
+	if row.Err() != nil {
+		return post, row.Err()
+	}
+
+	err := row.Scan(
+		&post.Pid,
+		&post.Title,
+		&post.Content,
+		&post.Markdown,
+		&post.CategoryId,
+		&post.UserId,
+		&post.ViewCount,
+		&post.Type,
+		&post.Slug,
+		&post.CreateAt,
+		&post.UpdateAt)
+
+	if err != nil {
+		return post, row.Err()
+	}
+
+	return post, nil
+}
